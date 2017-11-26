@@ -76,7 +76,6 @@ $("#grabar").on("click", function () {
         for (b = 0; b < tBody.length; b++) {
             var nodes = tBody[b].childNodes;
             if (nodes.length !== 0) {
-                // console.log(nodes)
                 for (j = 0; j < nodes.length; j++) {
                     // console.log(nodes[j].textContent);
                     if(nodes[j].textContent){
