@@ -1,0 +1,73 @@
+
+/*- Original:  Kathi O'Shea (Kathi.O'Shea@internet.com) --
+-- Web Site:  http://www.web-savant.com/users/kathi/asp --
+*/
+
+
+<!-- Begin
+function moveOver()  
+{
+var boxLength = document.choiceForm.choiceBox.length;
+alert(boxLength);
+var selectedItem = document.choiceForm.available.selectedIndex;
+var selectedText = document.choiceForm.available.options[selectedItem].text;
+var selectedValue = document.choiceForm.available.options[selectedItem].value;
+var i;
+var isNew = true;
+if (boxLength != 0) {
+for (i = 0; i < boxLength; i++) {
+thisitem = document.choiceForm.choiceBox.options[i].text;
+if (thisitem == selectedText) {
+isNew = false;
+break;
+      }
+   }
+} 
+if (isNew) {
+newoption = new Option(selectedText, selectedValue, false, false);
+document.choiceForm.choiceBox.options[boxLength] = newoption;
+}
+document.choiceForm.available.selectedIndex=-1;
+}
+function removeMe() {
+var boxLength = document.choiceForm.choiceBox.length;
+arrSelected = new Array();
+var count = 0;
+for (i = 0; i < boxLength; i++) {
+if (document.choiceForm.choiceBox.options[i].selected) {
+arrSelected[count] = document.choiceForm.choiceBox.options[i].value;
+}
+count++;
+}
+var x;
+for (i = 0; i < boxLength; i++) {
+for (x = 0; x < arrSelected.length; x++) {
+if (document.choiceForm.choiceBox.options[i].value == arrSelected[x]) {
+document.choiceForm.choiceBox.options[i] = null;
+   }
+}
+boxLength = document.choiceForm.choiceBox.length;
+   }
+}
+function saveMe() {
+var strValues = "";
+var boxLength = document.choiceForm.choiceBox.length;
+var count = 0;
+if (boxLength != 0) {
+for (i = 0; i < boxLength; i++) {
+if (count == 0) {
+strValues = document.choiceForm.choiceBox.options[i].value;
+}
+else {
+strValues = strValues + "," + document.choiceForm.choiceBox.options[i].value;
+}
+count++;
+   }
+}
+if (strValues.length == 0) {
+alert("No has hecho ninguna selección");
+}
+else {
+alert("Aquí están los valores seleccionados:\r\n" + strValues);
+   }
+}

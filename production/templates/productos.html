@@ -1,0 +1,178 @@
+<div class="row">
+    <!--<div class="col-xs-6">-->
+    <!--<h3>Ejemplo desde JavaScript</h3>-->
+    <!--<div id="tree"></div>-->
+    <!--</div>-->
+    <div class="col-xs-6">
+        <h3>Documentos de Funcionarios </h3>
+        <h4>Si acepta el o los documento(s) presentado(s) haga click en el recuadro de la izquierda en cada uno de
+            ellos, en caso contrario déjelo en blanco </h4>
+
+        <div id="tree2">
+
+        </div>
+        <!--<input type="file" id="fileElem" multiple="multi" accept="pdf" name="myfiles"/>-->
+        <form method="post" enctype="multipart/form-data" action="/upload-file">
+            <input type="file" name="file" id="file" class="inputfile" data-multiple-caption="{count} files selected"
+                   multiple/>
+            <hr>
+            <button type="submit" id="grabar" class="btn btn-default">Grabar</button>
+        </form>
+    </div>
+    <div class="col-xs-6">
+
+    </div>
+    <!--<div class="col-xs-6">-->
+    <!--<h3>TEST</h3>-->
+    <!--<div id="tree"></div>-->
+    <!--</div>-->
+</div>
+
+<script>
+    var inputs = document.querySelectorAll('.inputfile');
+    Array.prototype.forEach.call(inputs, function (input) {
+        var label = input.nextElementSibling,
+            labelVal = label.innerHTML;
+        input.addEventListener('change', function (e) {
+            alert("labelVal", labelVal)
+            var fileName = '';
+            if (this.files && this.files.length > 1)
+                fileName = ( this.getAttribute('data-multiple-caption') || '' ).replace('{count}', this.files.length);
+            else
+                fileName = e.target.value.split('\\').pop();
+
+            if (fileName)
+                label.querySelector('span').innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
+        });
+    });
+
+</script>
+
+<script>
+    //el document ready se ejecuta una sola vez, y es cuando se carga o se hace un reload a la pagina (solo esas veces)
+    nodeSelected = []
+    $$(document).ready(function () {
+
+
+        //Se ejecutara al momento de realizar la primera carga de la pagina
+
+        $$.get("/tree", function (data) {
+//        $$(".result").html(data);
+            $$("#tree2").treeview({
+                data: data,
+                showCheckbox: true,
+                onNodeChecked: function (event, data) {
+                    console.log("checked==>" + data)
+                    nodeSelected.push(data)
+                },
+                onNodeUnchecked: function (event, data) {
+                    for (i = 0; i < nodeSelected.length; i++) {
+                        console.log(nodeSelected[i].nodeId)
+                        if (data.nodeId === nodeSelected[i].nodeId) {
+                            nodeSelected.splice(i, 1)
+                        }
+                    }
+                },
+                onNodeSelected: function (event, data) {
+                    //console.log(data)
+                    radioObject.checked = true
+                    window.open(data.path)
+                }
+
+            })
+            //$$('#tree2').treeview({data: data});
+
+        });
+    });
+
+    $$("#grabar").on("click", function () {
+        wuser = document.cookie;
+        alert(wuser);
+        arrayParent = []
+        if (nodeSelected.length === 0) {
+            alert("No hay archivos seleccionados")
+        } else {
+            for (i = 0; i < nodeSelected.length; i++) {
+                arrayParent.push(nodeSelected[i].parentId)
+            }
+        }
+        arrayParent = arrayParent.filter(function (item, index, inputArray) {
+            return inputArray.indexOf(item) == index;
+        });
+        var result = {}
+        var files = []
+        var archivos = []
+        for (i = 0; i < arrayParent.length; i++) {
+            var parent = $$('#tree2').treeview('getNode', arrayParent[i])
+            alert("parent.text: " + parent.text)
+            console.log(parent.text)
+            result = {folder: parent.text, files: []}
+            for (j = 0; j < nodeSelected.length; j++) {
+                if (nodeSelected[j].parentId === parent.nodeId) {
+                    files.push(nodeSelected[j].text)
+                }
+                result.files = files
+            }
+            archivos.push(result)
+            files = []
+        }
+
+        console.log("******")
+        console.log("archivos: " + archivos)
+
+        $$.post("/tree-result", JSON.stringify({file: archivos}), function (data, status) {
+            console.log("status:" + status)
+            console.log("data:" + data)
+        })
+
+    })
+
+    /*
+        function getTree() {
+            // Some logic to retrieve, or generate tree structure
+            var tree = [
+                {
+                    text: "Parent 1",
+                    showCheckbox: true,
+                    nodes: [
+                        {
+                            text: "Child 1",
+                            nodes: [
+                                {
+                                    text: "Grandchild 1"
+                                },
+                                {
+                                    text: "Grandchild 2"
+                                }
+                            ]
+                        },
+                        {
+                            text: "Child 2"
+                        },
+                        {
+                            text: "Child 3"
+                        }
+                    ]
+                },
+                {
+                    text: "Parent 2"
+                },
+                {
+                    text: "Parent 3"
+                },
+                {
+                    text: "Parent 4"
+                },
+                {
+                    text: "Parent 5"
+                }
+            ];
+            return tree;
+        }
+
+        $$('#tree').treeview({data: getTree()}); */
+
+</script>
+
