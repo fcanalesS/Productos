@@ -47,12 +47,10 @@
       <file leaf-file-name="productos.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/production/static/js/productos.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="106" column="34" lean-forward="false" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+            <state relative-caret-position="506">
+              <caret line="57" column="7" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="57" selection-end-column="7" />
               <folding>
-                <element signature="e#2358#2402#0" expanded="false" />
-                <marker date="1511722244522" expanded="true" signature="718:735" ph="..." />
-                <marker date="1511722244522" expanded="true" signature="1964:1982" ph="..." />
+                <marker date="1511727087210" expanded="true" signature="726:743" ph="..." />
               </folding>
             </state>
           </provider>
@@ -165,7 +163,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="472" />
     <option name="y" value="95" />
     <option name="width" value="1221" />
@@ -788,7 +786,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="472" y="95" width="1922" height="991" extended-state="7" />
+    <frame x="472" y="95" width="1922" height="991" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1390625" sideWeight="0.48998946" order="0" side_tool="false" content_ui="combo" />
@@ -980,12 +978,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/production/static/js/productos.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="106" column="34" lean-forward="false" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+        <state relative-caret-position="506">
+          <caret line="57" column="7" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="57" selection-end-column="7" />
           <folding>
-            <element signature="e#2358#2402#0" expanded="false" />
-            <marker date="1511722244522" expanded="true" signature="718:735" ph="..." />
-            <marker date="1511722244522" expanded="true" signature="1964:1982" ph="..." />
+            <marker date="1511727087210" expanded="true" signature="726:743" ph="..." />
           </folding>
         </state>
       </provider>
