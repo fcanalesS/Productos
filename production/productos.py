@@ -13,7 +13,10 @@ import web
 
 
 urls = ('/', 'Index',
+        #Esto es lo que agregue yo
         '/test', 'Prueba',
+        '/test-result', 'PruebaResult',
+        #Esto es lo que agregue yo
         '/tree', 'Tree',
         '/tree-faltantes', 'TreeFaltantes',
         '/tree-result', 'TreeResult',
@@ -57,6 +60,20 @@ class Prueba:
         add_row = render_plain.add_row()
         faltantes = render_plain.tabla_faltantes()
         return htmlout.test(add_row, faltantes)
+
+class PruebaResult:
+    def POST(self):
+        data = web.input()
+        treeView = json.loads(data['treeView'])
+
+        for i in treeView:
+            print "Carpeta: " + i['folder']
+            files = i['files']
+            for f in files:
+                print f['fileName'] + " / " + f['status']
+
+        web.header('Content-Type', 'text/plain')
+        return None
 
 class TreeFaltantes():
     def GET(self):
